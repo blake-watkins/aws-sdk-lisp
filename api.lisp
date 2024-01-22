@@ -23,8 +23,11 @@
   (:import-from #:dexador)
   (:import-from #:quri)
   (:export #:*session*
+           #:*proxy*
            #:aws-request))
 (in-package #:aws-sdk/api)
+
+(defvar *proxy* nil)
 
 (defun aws-request (req &key want-stream)
   (check-type req request)
@@ -65,4 +68,5 @@
                                     ,@headers)
                          :content payload
                          :keep-alive nil
-                         :want-stream want-stream)))))))
+                         :want-stream want-stream
+                         :proxy *proxy*)))))))
